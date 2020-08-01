@@ -1,12 +1,13 @@
 TODO App
 
-```
+<!--```
 npm install
 git checkout -b <branchname>
 npm run dev
 ```
+-->
 
-See the breathtaking designs [here](http://localhost:3000/designs/)
+<!--See the breathtaking designs [here](http://localhost:3000/designs/)-->
 
 <!--Here's a list of steps in case they are useful.  You can build in any order you like though ;)-->
 1.  Design a database to store a list of tasks, e.g. task details, priority, completed yes/no
