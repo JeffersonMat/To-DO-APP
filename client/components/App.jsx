@@ -1,18 +1,13 @@
-import React from 'react'
-import Todo from './Todo'
-// import {receivedTask} from '../actions/index'
-// import {connect} from 'react-redux'
+import React from "react";
+import Todo from "./Todo";
 
 class App extends React.Component {
-
   render() {
-    
     return (
-
-       <>
-      <Todo/>
-     </> 
-    )
+      <>
+        <Todo />
+      </>
+    );
   }
 }
-export default App
+export default App;

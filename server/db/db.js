@@ -9,6 +9,7 @@ module.exports = {
   deleteTasks,
   editTask,
   editTaskPriority,
+  editTaskComplete,
   
 };
 
@@ -35,5 +36,10 @@ function editTask(id, task, db = connection) {
 }
 
 function editTaskPriority(id, task, db = connection) {
-  return db("TodoList").where("id", id).update({ Priority:task })
+  return db("TodoList").where("id", id).update({ Priority: task })
+}
+
+
+function editTaskComplete(id, task, db = connection) {
+  return db("TodoList").where("id", id).update({Completed:task})
 }

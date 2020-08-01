@@ -1,7 +1,11 @@
-import React from "react"
-import { addTask, getTask } from "../apis/api"
-import {updateTask, updateTaskDescription,receivedTask} from "../actions/index"
-import {connect} from 'react-redux'
+import React from "react";
+import { addTask, getTask } from "../apis/api";
+import {
+  updateTask,
+  updateTaskDescription,
+  receivedTask,
+} from "../actions/index";
+import { connect } from "react-redux";
 
 class Form extends React.Component {
   state = {
@@ -9,7 +13,7 @@ class Form extends React.Component {
     description: "",
     priority: 0,
     completed: false,
-  }
+  };
 
   handleChange = (event) => {
     event.preventDefault();
@@ -19,13 +23,13 @@ class Form extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-     
-    const task = this.props.task
-   
+
+    const task = this.props.task;
+
     addTask(this.state).then((res) => {
-    this.props.dispatch(receivedTask(task))
-    })
-  }
+      this.props.dispatch(receivedTask(task));
+    });
+  };
 
   render() {
     return (
@@ -34,12 +38,12 @@ class Form extends React.Component {
           type="text"
           name="task"
           defaultValue={this.state.task}
-          onChange={this.handleChange}/>
-        <input type="submit" value="ADD"/>
+          onChange={this.handleChange}
+        />
+        <input type="submit" value="ADD" />
       </form>
     );
   }
 }
 
-
-export default connect() (Form)
+export default connect()(Form);

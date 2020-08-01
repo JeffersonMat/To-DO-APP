@@ -56,11 +56,11 @@ router.put('/:id', (req, res) => {
 })
 
 
-router.put('/:id', (req, res) => {
+router.put('/priority/:id', (req, res) => {
   
   const id = req.params.id
   const task = req.body.priority
- 
+
   db.editTaskPriority(id, task)
   .then(() =>{
     db.getTask()
@@ -73,6 +73,23 @@ router.put('/:id', (req, res) => {
   })
 })
 
+
+router.put('/complete/:id', (req, res) => {
+  
+  const id = req.params.id
+  const task = req.body.complete
+
+  db.editTaskComplete(id, task)
+  .then(() =>{
+    db.getTask()
+  })
+  .then(tasks =>{
+    res.send(tasks)
+  })
+  .catch(err => {
+    res.status(500).send(err.message)
+  })
+})
 
 
 module.exports = router

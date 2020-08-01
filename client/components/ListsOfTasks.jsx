@@ -1,171 +1,248 @@
-import React from "react"
-import FormDescription from './FormDescription'
-import {removeTask} from '../apis/api'
-import {editTaskPriority} from "../apis/priority"
-import {deleteTask, updateTask} from '../actions/index'
-import {connect} from 'react-redux'
-
+import React from "react";
+import FormDescription from "./FormDescription";
+import { removeTask } from "../apis/api";
+import { editTaskPriority } from "../apis/priority";
+import { editTaskComplete } from "../apis/complete";
+import { deleteTask, updateTask } from "../actions/index";
+import { connect } from "react-redux";
 
 class ListOfTasks extends React.Component {
- 
-    state= {
-        showDetails:false,
-        isDescriptionClicked:false,
-        showDeleteButton:false,
-        priority:'',
-        isClick: false,
-        isCompleteClick:false,
-        isTaskClick:false,
-    }
+  state = {
+    showDetails: false,
+    isDescriptionClicked: false,
+    showDeleteButton: false,
+    complete: false,
+    isClick: false,
+    isCompleteClick: false,
+    isTaskClick: false,
+  };
 
- handleClick=(e)=>{
-     e.preventDefault()
-     
-     this.setState({ showDetails:true, showDeleteButton:true, isTaskClick:true})    
-  
+  handleClick = (e) => {
+    e.preventDefault();
+    this.setState({
+      showDetails: true,
+      showDeleteButton: true,
+      isTaskClick: true,
+    });
+  };
 
-  }
+  showTextField = (e) => {
+    e.preventDefault();
+    this.setState({ isDescriptionClicked: true });
+  };
 
-  showTextField=(e)=>{ 
-    e.preventDefault()
-    this.setState({isDescriptionClicked:true}) 
-  }
-  
-hideTextField=(e)=>{ 
-  e.preventDefault(),
-   this.setState({isDescriptionClicked:false})
-}
-  
- handleDelete =(event) =>{ 
-    
-      event.preventDefault()
-      const id = this.props.tasks.id
-    
-      removeTask(id)
-      .then(() =>{this.props.dispatch(deleteTask(id))})
-      .then(()=>{this.props.dispatch(updateTask(this.props.tasks))})
-  }
-  
-  handlePriorityButton=(e)=>{
-   e.preventDefault()
-   this.setState({isClick:false})
-  }
-  
-  handleCompleteButton=(e)=>{
-    e.preventDefault()
-    this.setState({isCompleteClick:false})
-   }
+  hideTextField = (e) => {
+    e.preventDefault(), this.setState({ isDescriptionClicked: false });
+  };
 
-  handleTaskButton=(e)=>{
-    e.preventDefault()
-    console.log("works");
-    this.setState({isTaskClick:false, showDeleteButton:false, showDetails:false})
-  }
+  handleDelete = (event) => {
+    event.preventDefault();
+    const id = this.props.tasks.id;
 
-  handlePriority=(event)=>{
-    
-       const name =  event.target.name
-       const id = this.props.tasks.id 
-      
-       const newTask = {
-        id: this.props.tasks.id,
-        Tasks: this.props.tasks.Tasks ,
-        Description: this.props.tasks.Description,
-        Priority: this.state.priority,
-        Completed: this.props.tasks.Completed,
-    } 
+    removeTask(id)
+      .then(() => {
+        this.props.dispatch(deleteTask(id));
+      })
+      .then(() => {
+        this.props.dispatch(updateTask(this.props.tasks));
+      });
+  };
 
+  handlePriorityButton = (e) => {
+    e.preventDefault();
+    this.setState({ isClick: false });
+  };
 
-   if(name == 'high'){this.setState({priority:"High", isClick:true })
-     editTaskPriority(id,this.state.priority) 
-    .then(()=>{this.props.dispatch(updateTask(newTask) )})   
-   }
-   if(name == 'low'){this.setState({priority:"Low", isClick:true}) 
-      editTaskPriority(id,this.state.priority) 
-      .then(()=>{this.props.dispatch(updateTask(newTask) )}) 
-     }    
-  }
-  
+  handleCompleteButton = (e) => {
+    e.preventDefault();
+    this.setState({ isCompleteClick: true });
+  };
 
-  handleComplete=(event)=>{
-    const name =  event.target.name
+  handleTaskButton = (e) => {
+    e.preventDefault();
+    this.setState({
+      isTaskClick: false,
+      showDeleteButton: false,
+      showDetails: false,
+    });
+  };
 
-if(name == 'Yes'){this.setState({ isCompleteClick:true })}
+  handlePriority = (event) => {
+    const name = event.target.name;
+    const id = this.props.tasks.id;
 
-if(name == 'Not Yet'){this.setState({ isCompleteClick:true})}
+    const newTask = {
+      id: this.props.tasks.id,
+      Tasks: this.props.tasks.Tasks,
+      Description: this.props.tasks.Description,
+      Priority: name,
+      Completed: this.props.tasks.Completed,
+    };
 
-  }
+    this.setState({ isClick: true });
+    editTaskPriority(id, name).then(() => {
+      this.props.dispatch(updateTask(newTask));
+    });
+  };
 
+  handleComplete = (event) => {
+    event.preventDefault();
+    const name = event.target.name;
+    const id = this.props.tasks.id;
 
-  renderTasksLists=(task, taskId, handleclick)=>{
-      return<li><button className="buttonDeets" onClick={handleclick} name={taskId}>{task}</button></li>
-  }
+    const newTask = {
+      id: this.props.tasks.id,
+      Tasks: this.props.tasks.Tasks,
+      Description: this.props.tasks.Description,
+      Priority: this.props.tasks.Priority,
+      Completed: name,
+    };
 
-  renderTasksDescription=(description, showtextfield)=>{  
-     return<li><button id="buttonDeets description-tittle" onClick={showtextfield}>Description:{description}</button></li>
-  }
+    this.setState({ isCompleteClick: false });
+    editTaskComplete(id, name).then(() => {
+      this.props.dispatch(updateTask(newTask));
+    });
+  };
 
-  renderPriorityStatus=(priority)=>{
-    const isClick= this.state.isClick
-  
-    return(
-    <>
-    <li><button onClick={this.handlePriorityButton}>Priority:{priority}</button></li>
-     {isClick ? <></> :
-       <>
-       <label>High<input name="high" value="submit" type="radio" onClick={this.handlePriority}/></label>
-       <label>Low<input name="low" value="submit" type="radio" onClick={this.handlePriority}/></label>
-       </>
-     }
-       </>
-  )
-}
+  renderTasksLists = (task, taskId, handleclick) => {
+    return (
+      <li>
+        <button className="buttonDeets" onClick={handleclick} name={taskId}>
+          {task}
+        </button>
+      </li>
+    );
+  };
 
-  renderCompletedStatus=(completed)=>{
-     const isCompleteClick = this.state.isCompleteClick
+  renderTasksDescription = (description, showtextfield) => {
+    return (
+      <li>
+        <button id="buttonDeets description-tittle" onClick={showtextfield}>
+          Description:{description}
+        </button>
+      </li>
+    );
+  };
 
-      return (
+  renderPriorityStatus = (priority) => {
+    const isClick = this.state.isClick;
+
+    return (
       <>
-      <li><button onClick={this.handleCompleteButton}>Completed:{completed}</button></li>
-      {isCompleteClick ? <></> :
-        <>
-      <label>Yes<input name ="Yes"    type="radio" onClick={this.handleComplete}/></label>
-      <label>No<input  name="Not Yet" type="radio" onClick={this.handleComplete}/></label>
-        </>
-        }
+        <li>
+          <button onClick={this.handlePriorityButton}>
+            Priority:{priority}
+          </button>
+        </li>
+        {isClick ? (
+          <></>
+        ) : (
+          <>
+            <label>
+              High
+              <input
+                name="Urgent"
+                value="submit"
+                type="radio"
+                onClick={this.handlePriority}
+              />
+            </label>
+            <label>
+              Medium
+              <input
+                name="Need to do it soon"
+                value="submit"
+                type="radio"
+                onClick={this.handlePriority}
+              />
+            </label>
+            <label>
+              Low
+              <input
+                name="Not much pressure"
+                value="submit"
+                type="radio"
+                onClick={this.handlePriority}
+              />
+            </label>
+          </>
+        )}
       </>
-      )
+    );
+  };
+
+  renderCompletedStatus = (completed) => {
+    const isCompleteClick = this.state.isCompleteClick;
+
+    return (
+      <>
+        <li>
+          <button onClick={this.handleCompleteButton}>
+            Completed:{completed}
+          </button>
+        </li>
+        {isCompleteClick && (
+          <>
+            <label>
+              Yes
+              <input
+                name="Done"
+                value="submit"
+                type="radio"
+                onClick={this.handleComplete}
+              />
+            </label>
+            <label>
+              No
+              <input
+                name="Not Yet"
+                value="submit"
+                type="radio"
+                onClick={this.handleComplete}
+              />
+            </label>
+            :<></>
+          </>
+        )}
+      </>
+    );
+  };
+
+  render() {
+    const taskId = this.props.tasks.id;
+    const task = this.props.tasks.Tasks;
+    const description = this.props.tasks.Description;
+    const priority = this.props.tasks.Priority;
+    const completed = this.props.tasks.Completed;
+
+    return (
+      <ul>
+        {this.state.isTaskClick
+          ? this.renderTasksLists(task, taskId, this.handleTaskButton)
+          : this.renderTasksLists(task, taskId, this.handleClick)}
+        {!this.state.showDeleteButton && (
+          <button id="delete-button" onClick={this.handleDelete}>
+            Delete
+          </button>
+        )}
+
+        {this.state.showDetails ? (
+          <ul>
+            {this.state.isDescriptionClicked
+              ? this.renderTasksDescription(description, this.hideTextField)
+              : this.renderTasksDescription(description, this.showTextField)}
+            {this.state.isDescriptionClicked && (
+              <FormDescription task={this.props.tasks} />
+            )}
+            {this.renderPriorityStatus(priority)}
+            {this.renderCompletedStatus(completed)}
+          </ul>
+        ) : (
+          <></>
+        )}
+      </ul>
+    );
+  }
 }
 
-render(){
-  
-  const task= this.props.tasks.Tasks
-  const taskId= this.props.tasks.id
-  const description=this.props.tasks.Description
-  const priority= this.props.tasks.Priority
-  const completed= this.props.tasks.Completed
-
-return(
-<ul> 
-  {this.state.isTaskClick ? this.renderTasksLists(task, taskId, this.handleTaskButton) : this.renderTasksLists(task, taskId, this.handleClick)}
-  {!this.state.showDeleteButton  && <button id="delete-button" onClick={this.handleDelete}>Delete</button> }
-
-    {
-    this.state.showDetails ? 
-    <ul>
-        {this.state.isDescriptionClicked ? this.renderTasksDescription(description, this.hideTextField) : this.renderTasksDescription(description, this.showTextField)} 
-        {this.state.isDescriptionClicked && <FormDescription task={this.props.tasks}/>}
-        {this.renderPriorityStatus(priority)}
-        {this.renderCompletedStatus(completed)}
-    </ul>
-     : <></>
-     }
-
-</ul> 
-)
-}
-}
-
-export default  connect()(ListOfTasks)
-
-
+export default connect()(ListOfTasks);

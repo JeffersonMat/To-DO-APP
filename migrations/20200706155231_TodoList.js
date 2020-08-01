@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
         table.string('Tasks')
         table.string('Description')
         table.string('Priority')
-        table.boolean('Completed')
+        table.string('Completed')
       })
 }
 

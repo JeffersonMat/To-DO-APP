@@ -2,23 +2,17 @@ import React from "react";
 import { getTask } from "../apis/api";
 import Form from "./Form";
 import ListOfTasks from "./ListsOfTasks";
-import {receivedTask} from '../actions/index'
-import {connect} from 'react-redux'
+import { receivedTask } from "../actions/index";
+import { connect } from "react-redux";
 
 class Todo extends React.Component {
- 
-    componentDidMount() {
-        getTask() 
-        .then((task) => {
-           
-    
-   return this.props.dispatch(receivedTask(task))})
+  componentDidMount() {
+    getTask().then((task) => {
+      return this.props.dispatch(receivedTask(task));
+    });
   }
 
- 
-
   render() {
-    
     return (
       <>
         <h1>Todo</h1>
@@ -30,10 +24,10 @@ class Todo extends React.Component {
     );
   }
 }
- function mapstateprops(globalState){
-    return {
-        tasks: globalState.tasks
-    }
- }
+function mapstateprops(globalState) {
+  return {
+    tasks: globalState.tasks,
+  };
+}
 
-export default  connect(mapstateprops)(Todo);
+export default connect(mapstateprops)(Todo);
