@@ -1,6 +1,6 @@
 import React from "react";
 import FormDescription from "./FormDescription";
-import { removeTask } from "../apis/api";
+import { removeTask, getTask } from "../apis/api";
 import { editTaskPriority } from "../apis/priority";
 import { editTaskComplete } from "../apis/complete";
 import { deleteTask, updateTask } from "../actions/index";
@@ -44,9 +44,18 @@ class ListOfTasks extends React.Component {
         this.props.dispatch(deleteTask(id));
       })
       .then(() => {
-        this.props.dispatch(updateTask(this.props.tasks));
-      });
-  };
+      return this.props.dispatch(updateTask(this.props.tasks));
+      })
+      .then(()=>{
+         this.props.dispatch(getTask())})
+         .then((task) => {
+         return this.props.dispatch(receivedTask(task))
+       
+       })
+    
+     
+     
+  }
 
   handlePriorityButton = (e) => {
     e.preventDefault();

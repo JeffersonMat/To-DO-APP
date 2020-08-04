@@ -1,10 +1,6 @@
 import React from "react";
 import { addTask, getTask } from "../apis/api";
-import {
-  updateTask,
-  updateTaskDescription,
-  receivedTask,
-} from "../actions/index";
+import { receivedTask } from "../actions/index";
 import { connect } from "react-redux";
 
 class Form extends React.Component {
@@ -26,9 +22,15 @@ class Form extends React.Component {
 
     const task = this.props.task;
 
-    addTask(this.state).then((res) => {
-      this.props.dispatch(receivedTask(task));
-    });
+    addTask(this.state)
+      .then((res) => {
+        this.props.dispatch(receivedTask(task));
+      })
+      .then(() => {
+        getTask().then((task) => {
+          return this.props.dispatch(receivedTask(task));
+        });
+      });
   };
 
   render() {

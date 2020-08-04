@@ -1,45 +1,40 @@
-export const RECEIVED_TASK ='RECEIVED_TASK'
-export const DELETE_TASK = 'DELETE_TASK'
-export const UPDATE_TASK = "UPDATE_TASK"
+import request from "superagent";
 
+export const RECEIVED_TASK = "RECEIVED_TASK";
+export const DELETE_TASK = "DELETE_TASK";
+export const UPDATE_TASK = "UPDATE_TASK";
+export const GET_TASKS = "GET_TASKS";
 
-export const  receivedTask = (tasks)=> {
-
-    return {
-      type: RECEIVED_TASK,
-       tasks: tasks
-    }
-  }
-
-
-export const updateTask = (task) =>{
-  console.log(task)
-  
+export const receivedTask = (tasks) => {
   return {
-    
+    type: RECEIVED_TASK,
+    tasks: tasks,
+  };
+};
+
+export const updateTask = (task) => {
+  return {
     type: UPDATE_TASK,
-    
-    task
-    
-  }
-}
 
+    task,
+  };
+};
 
-export const deleteTask =(id) =>{
+export const deleteTask = (id) => {
+  return {
+    type: DELETE_TASK,
+    id: id,
+  };
+};
+
+export const deleteTasks = (id) => {
   return (dispatch) => {
-    return request.delete(`/${id}`)
-    .then(() => {
-      dispatch(removeTask(id))
-    })
-    .catch(err => {
-      console.log('It broke')
-    })
-  }
-}
-
-
-
-
-
-
-
+    removeTask(id)
+      .then(() => {
+        dispatch(deleteTask(id));
+      })
+      .catch((err) => {
+        console.log("It broke");
+      });
+  };
+};
