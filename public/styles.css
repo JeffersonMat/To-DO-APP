@@ -2,6 +2,7 @@
 
 *, html {
   box-sizing: border-box;
+ 
 }
 
 body {
@@ -35,10 +36,11 @@ h1 {
 .todo-list li {
   display: flex;
   margin: 0 -3rem 4px;
-  padding: 1.1rem 3rem;
+  padding: 1.1rem;
   justify-content: space-between;
   align-items: center;
   background: rgba(255,255,255,0.1);
+  list-style: none;
 }
 
 form {
@@ -83,6 +85,7 @@ display: inline-block;
 text-decoration: none;
 padding: 0;
 font-size: 20px;
+/* width:100wv; */
 
 }
 #delete-button{
@@ -92,13 +95,15 @@ color:#444;
 
 button{
 background-color:#ff6666;
+padding:0 1.8rem 0  1rem;
 margin-top:10px;
 color:white;
 font-size: 16px;
 border:1px solid rgba(255,255,255,.3);
 text-transform: uppercase;
 height:3rem;
-width: 50vw;
+width:100%
+
 }
 button:hover{
   background: rgba(255,255,255,0.1);
@@ -109,13 +114,12 @@ button select{
 }
 
 
-.container-todo{
+.unordered-tag{
 
-  display: flex;
-  flex-direction: column;
+  padding: 0 40px;
+}
+.container-todo{  
   text-align: center;
 }
 
-ul{
-  padding:0;
-}
+

@@ -132,12 +132,13 @@ class ListOfTasks extends React.Component {
 
     return (
       
-   
+     <div className="list-container">
       <li   key ={this.props.tasks.id} style={{listStyleType:"none"}} >
         <button className="buttonDeets" onClick={handleclick} name={taskId} style={this.completeStyling(complete)}>
           {task}
         </button>
        </li>
+       </div>
     );
   };
 
@@ -246,7 +247,7 @@ class ListOfTasks extends React.Component {
     const completed = this.props.tasks.Completed;
 
     return (
-      <ul>
+      <ul className="unordered-tag">
         {this.state.isTaskClick
           ? this.renderTasksLists(task, taskId, this.handleTaskButton)
           : this.renderTasksLists(task, taskId, this.handleClick)}
@@ -257,7 +258,7 @@ class ListOfTasks extends React.Component {
         )}
 
         {this.state.showDetails ? (
-          <ul>
+          <ul className="unordered-tag">
             {this.state.isDescriptionClicked
               ? this.renderTasksDescription(description, this.hideTextField)
               : this.renderTasksDescription(description, this.showTextField)}
@@ -266,7 +267,7 @@ class ListOfTasks extends React.Component {
             )}
             {this.renderPriorityStatus(priority)}
             {this.renderCompletedStatus(completed)}
-          </ul>
+        </ul>
         ) : (
           <></>
         )}

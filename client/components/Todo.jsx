@@ -16,7 +16,7 @@ class Todo extends React.Component {
     return (
       <>
         <div className="container-todo">
-        <h1>TASK MANAGER</h1>
+        <h1>Tasks Manager</h1>
         {this.props.tasks.map((task) => (
           <ListOfTasks tasks={task} />
         ))}
