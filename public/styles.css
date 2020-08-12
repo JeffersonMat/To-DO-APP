@@ -98,6 +98,7 @@ font-size: 16px;
 border:1px solid rgba(255,255,255,.3);
 text-transform: uppercase;
 height:3rem;
+width: 50vw;
 }
 button:hover{
   background: rgba(255,255,255,0.1);
@@ -105,4 +106,16 @@ button:hover{
 
 button select{
   text-transform: none;
+}
+
+
+.container-todo{
+
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+ul{
+  padding:0;
 }

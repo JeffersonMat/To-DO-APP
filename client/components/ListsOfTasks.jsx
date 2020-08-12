@@ -15,6 +15,7 @@ class ListOfTasks extends React.Component {
     isClick: false,
     isCompleteClick: false,
     isTaskClick: false,
+    styleComplete:false,
   };
 
   handleClick = (e) => {
@@ -99,6 +100,12 @@ class ListOfTasks extends React.Component {
     const name = event.target.name;
     const id = this.props.tasks.id;
 
+   if(name==='Done'){
+     this.setState({
+       styleComplete:true,
+     })
+   }
+
     const newTask = {
       id: this.props.tasks.id,
       Tasks: this.props.tasks.Tasks,
@@ -113,13 +120,24 @@ class ListOfTasks extends React.Component {
     });
   };
 
+  completeStyling =(complete) => {
+  
+    if(complete==='Done'){
+      return {textDecoration:'line-through black'}
+      }
+  }
+
   renderTasksLists = (task, taskId, handleclick) => {
+   const complete= this.props.tasks.Completed
+
     return (
-      <li>
-        <button className="buttonDeets" onClick={handleclick} name={taskId}>
+      
+   
+      <li   key ={this.props.tasks.id} style={{listStyleType:"none"}} >
+        <button className="buttonDeets" onClick={handleclick} name={taskId} style={this.completeStyling(complete)}>
           {task}
         </button>
-      </li>
+       </li>
     );
   };
 
@@ -179,6 +197,9 @@ class ListOfTasks extends React.Component {
       </>
     );
   };
+
+
+ 
 
   renderCompletedStatus = (completed) => {
     const isCompleteClick = this.state.isCompleteClick;
