@@ -12,7 +12,7 @@
     "test": "jest --noStackTrace --watchAll",
     "build": "webpack",
     "knex": "knex --knexfile server/db/knexfile.js",
-    "postinstall": "webpack && knex migrate:latest",
+    "postinstall": "webpack && knex migrate:latest"
   },
   "author": "EDA",
   "license": "ISC",
