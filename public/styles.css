@@ -23,7 +23,8 @@ h1 {
   margin: 4rem auto;
   padding: 2rem 3rem;
   max-width: 420px;
-  background-color: #ff6666;
+  /* background-color: #ff6666; */
+  background-image:url('../images/resizedDesktopImg.jpg');
   color: #f7f1f1;
 }
 
