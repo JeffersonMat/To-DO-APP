@@ -5,6 +5,6 @@ const routes = require('./routes/tasks')
 
 server.use(express.json())
 server.use(express.static('public'))
-server.use('/api/v1/todoList/', routes)
+server.use('/todoList/', routes)
 
 module.exports = server

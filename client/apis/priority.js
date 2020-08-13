@@ -1,7 +1,7 @@
 import request from "superagent"
 
-const TodoListUrl = "/todoList/priority/";
-const TodoListUrlComplete= "/todoList/complete/"
+const TodoListUrl = "/todoList/priority";
+const TodoListUrlComplete= "/todoList/complete"
 
 export function editTaskPriority(id, priority) {
 
