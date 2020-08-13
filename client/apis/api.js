@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-const TodoListUrl= 'http://localhost:3000/api/v1/todoList/'
+const TodoListUrl= 'todoList/'
 
 
 
