@@ -16,20 +16,24 @@ class ListOfTasks extends React.Component {
     isCompleteClick: false,
     isTaskClick: false,
     styleComplete:false,
-    arrowUp:false,
-    arrowDown:true,
+    swapArrows:false,
+  
+   
   };
 
   handleClick = (e) => {
-    e.preventDefault();
+   
     this.setState({
       showDetails: true,
       showDeleteButton: true,
       isTaskClick: true,
-      arrowUp:true,
-      arrowDown:false,
-    });
-  };
+      swapArrows:true,
+      isClick:true,
+      
+      
+    }) 
+  }
+
 
   showTextField = (e) => {
     e.preventDefault();
@@ -56,10 +60,7 @@ class ListOfTasks extends React.Component {
          .then((task) => {
          return this.props.dispatch(receivedTask(task))
        
-       })
-    
-     
-     
+       })  
   }
 
   handlePriorityButton = (e) => {
@@ -92,7 +93,6 @@ class ListOfTasks extends React.Component {
       Priority: name,
       Completed: this.props.tasks.Completed,
     };
-
     this.setState({ isClick: true });
     editTaskPriority(id, name).then(() => {
       this.props.dispatch(updateTask(newTask));
@@ -109,7 +109,6 @@ class ListOfTasks extends React.Component {
        styleComplete:true,
      })
    }
-
     const newTask = {
       id: this.props.tasks.id,
       Tasks: this.props.tasks.Tasks,
@@ -126,7 +125,7 @@ class ListOfTasks extends React.Component {
 
   completeStyling =(complete) => {
   
-    if(complete==='Done'){
+    if(complete==='YES'){
       return {textDecoration:'line-through red', opacity:0.5, background:'black', color:'#fff'}
       }
   }
@@ -138,9 +137,15 @@ class ListOfTasks extends React.Component {
       
     <div className="task-container">
       <li  key ={this.props.tasks.id} style={{listStyleType:"none"}} >
-        <button className="buttonDeets" onClick={handleclick} name={taskId} style={this.completeStyling(complete)}>
-    {task} {this.state.arrowUp  && !this.state.arrowDown ? <i class="small material-icons right">arrow_drop_up</i> : <i class="small material-icons right">arrow_drop_down</i>}
-        </button>
+       {this.state.isTaskClick ? 
+       <button className="buttonDeets" onClick={handleclick} name={taskId} style={this.completeStyling(complete)}>
+       {task} <i class="small material-icons right">arrow_drop_up</i>
+      </button> 
+      :
+       <button className="buttonDeets" onClick={handleclick} name={taskId} style={this.completeStyling(complete)}>
+       {task} <i class="small material-icons right">arrow_drop_down</i>
+      </button> 
+  }   
         <button id="delete-button" className="btn-large" onClick={this.handleDelete}><i className="large material-icons delete">delete</i></button>
        </li>
        </div>
@@ -151,9 +156,10 @@ class ListOfTasks extends React.Component {
   renderTasksDescription = (description, showtextfield) => {
     return (
       <li style={{listStyle:'none'}}>
-          <h5>Task Description</h5> 
-          <p>{description}</p>
-        <button className="btn-floating btn-small waves-effect waves-light" onClick={showtextfield}><i class="small material-icons ">add</i></button>
+            
+             <h5>Task Description</h5>
+             <p>{description}</p>
+             <button className="btn-floating btn-small waves-effect waves-light description-btn" onClick={showtextfield}><i class="small material-icons ">add</i></button>
       </li>
     );
   };
@@ -164,38 +170,45 @@ class ListOfTasks extends React.Component {
     return (
       <>
         <li style={{listStyle:'none'}}>
-          <button className="description-buttons"  onClick={this.handlePriorityButton}>
-            Priority: {priority}
-          </button>
+          {/* <button className="description-buttons"  onClick={this.handlePriorityButton}> */}   
+          <h5> Priority: {priority}<button className="btn-floating btn-small waves-effect waves-light priority-btn" onClick={this.handlePriorityButton}><i class="small material-icons ">add</i></button></h5>
         </li>
         {isClick ? (
           <></>
         ) : (
           <>
           
-              <input
-                className="priority-buttons"
+          
+              <button
+                className="btn-floating btn-small waves-effect waves-light priority-buttons"
                 name="Urgent"
-                value="High"
-                type="submit"
-                onClick={this.handlePriority}
-              />
-            
-              <input
-                className="priority-buttons"
-                name="Hurry Up"
-                value="Med"
-                type="submit"
-                onClick={this.handlePriority}
-              />
            
-              <input
-                className="priority-buttons"
-                name="Can Chill"  
-                value="Low"          
                 type="submit"
                 onClick={this.handlePriority}
-              />
+              ><i className="small material-icons ">priority_high</i>
+                </button>
+     
+                
+              
+              <button
+                className=" btn-floating btn-small waves-effect waves-light priority-buttons"
+                name="Hurry Up"
+            
+                type="submit"
+                onClick={this.handlePriority}
+              >
+                {/* <i className="small material-icons ">low_priority</i> */}
+              </button>
+                
+             <button
+                className="btn-floating btn-small waves-effect waves-light priority-buttons"
+                name="Can Chill"  
+                type="submit"       
+                onClick={this.handlePriority}
+                >
+                <i className="small material-icons">low_priority</i>
+                </button>
+           
        
           </>
         )}
@@ -212,28 +225,38 @@ class ListOfTasks extends React.Component {
     return (
       <>
         <li style={{listStyle:'none'}}>
-          <button className="description-buttons" onClick={this.handleCompleteButton}>
-            Completed: {completed}
-          </button>
+          {/* <button className="description-buttons" onClick={this.handleCompleteButton}>
+           Is completed? {completed}
+          </button> */}
+          <h5> Is Completed: {completed}<button className="btn-floating btn-small waves-effect waves-light priority-btn" onClick={this.handleCompleteButton}><i className="small material-icons ">add</i></button></h5>
+
         </li>
         {isCompleteClick && (
           <>
     
-              <input
-                className="complete-buttons"
-                name="Done"
+              <button
+                className="btn complete-buttons"
+                name="YES"
                 value="YES"
                 type="submit"
                 onClick={this.handleComplete}
-              />
+              >
+                <i className="small material-icons">done</i>
+
+              </button>
           
-              <input
-                className="complete-buttons"
-                name="Not Yet"
+          {/* btn-floating btn-small waves-effect waves-light */}
+   
+              <button
+                className="btn complete-buttons "
+                name="NOT YET"
                 value="NO"
                 type="submit"
                 onClick={this.handleComplete}
-              />
+              >
+                <i className="small material-icons done-icone">done</i>
+             </button>
+              
    
             <></>
           </>

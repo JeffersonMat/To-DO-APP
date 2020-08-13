@@ -109,22 +109,31 @@ form input[type="submit"] {
 }
 
 .complete-buttons{
-
-  /* margin:0.5rem;
-
-  padding:0;
-  color:#444;
-  width:60%; */
+  
   padding:0 1.3rem;
   color:#444;
   opacity: 0.9;
-  text-transform: uppercase;
-  border: 1px solid rgba(255,255,255,.3);
-  margin:5px 5px 0 60px;
 
+  text-transform: uppercase;
+  /* border: 1px solid rgba(255,255,255,.3); */
+  margin:5px 0 0 10px;
   cursor: pointer;
   transition: background .2s ease-out;
   height: 3rem;
+  width:40%;
+  border-radius:20%;
+}
+
+.btn{
+
+
+}
+
+
+
+
+.priority-btn{
+  margin-left:40px;
 }
 
 #buttonDeets{
