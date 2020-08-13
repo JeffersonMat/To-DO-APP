@@ -123,7 +123,7 @@ class ListOfTasks extends React.Component {
   completeStyling =(complete) => {
   
     if(complete==='Done'){
-      return {textDecoration:'line-through black'}
+      return {textDecoration:'line-through #ff6666'}
       }
   }
 
@@ -144,7 +144,7 @@ class ListOfTasks extends React.Component {
 
   renderTasksDescription = (description, showtextfield) => {
     return (
-      <li>
+      <li style={{listStyle:'none'}}>
         <button id="buttonDeets description-tittle" onClick={showtextfield}>
           Description:{description}
         </button>
@@ -157,42 +157,40 @@ class ListOfTasks extends React.Component {
 
     return (
       <>
-        <li>
-          <button onClick={this.handlePriorityButton}>
-            Priority:{priority}
+        <li style={{listStyle:'none'}}>
+          <button className="description-buttons"  onClick={this.handlePriorityButton}>
+            Priority: {priority}
           </button>
         </li>
         {isClick ? (
           <></>
         ) : (
           <>
-            <label>
-              High
+          
               <input
+                className="priority-buttons"
                 name="Urgent"
-                value="submit"
-                type="radio"
+                value="High"
+                type="submit"
                 onClick={this.handlePriority}
               />
-            </label>
-            <label>
-              Medium
+            
               <input
-                name="Need to do it soon"
-                value="submit"
-                type="radio"
+                className="priority-buttons"
+                name="Hurry Up"
+                value="Med"
+                type="submit"
                 onClick={this.handlePriority}
               />
-            </label>
-            <label>
-              Low
+           
               <input
-                name="Not much pressure"
-                value="submit"
-                type="radio"
+                className="priority-buttons"
+                name="Can Chill"  
+                value="Low"          
+                type="submit"
                 onClick={this.handlePriority}
               />
-            </label>
+       
           </>
         )}
       </>
@@ -207,32 +205,31 @@ class ListOfTasks extends React.Component {
 
     return (
       <>
-        <li>
-          <button onClick={this.handleCompleteButton}>
-            Completed:{completed}
+        <li style={{listStyle:'none'}}>
+          <button className="description-buttons" onClick={this.handleCompleteButton}>
+            Completed: {completed}
           </button>
         </li>
         {isCompleteClick && (
           <>
-            <label>
-              Yes
+    
               <input
+                className="complete-buttons"
                 name="Done"
-                value="submit"
-                type="radio"
+                value="YES"
+                type="submit"
                 onClick={this.handleComplete}
               />
-            </label>
-            <label>
-              No
+          
               <input
+                className="complete-buttons"
                 name="Not Yet"
-                value="submit"
-                type="radio"
+                value="NO"
+                type="submit"
                 onClick={this.handleComplete}
               />
-            </label>
-            :<></>
+   
+            <></>
           </>
         )}
       </>
