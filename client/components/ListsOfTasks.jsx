@@ -123,7 +123,7 @@ class ListOfTasks extends React.Component {
   completeStyling =(complete) => {
   
     if(complete==='Done'){
-      return {textDecoration:'line-through #ff6666'}
+      return {textDecoration:'line-through red', opacity:0.5, background:'black', color:'#fff'}
       }
   }
 
