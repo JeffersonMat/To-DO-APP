@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-const TodoListUrl= '/todoList'
+const TodoListUrl= '/todoList/'
 
 
 

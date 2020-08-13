@@ -146,7 +146,7 @@ class ListOfTasks extends React.Component {
     return (
       <li style={{listStyle:'none'}}>
         <button id="buttonDeets description-tittle" onClick={showtextfield}>
-          Description:{description}
+          Description: {description}
         </button>
       </li>
     );

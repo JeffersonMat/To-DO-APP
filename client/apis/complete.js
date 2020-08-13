@@ -1,6 +1,6 @@
 import request from "superagent"
 
-const TodoListUrl= "/todoList/complete"
+const TodoListUrl= "/todoList/complete/"
 
 export function editTaskComplete(id, complete) {
 
