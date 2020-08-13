@@ -49,6 +49,15 @@ form {
   display: flex;
   flex-wrap: wrap;
 }
+.description-form{
+  margin-top: 0.5rem;
+
+}
+
+.text-field{
+
+  width:100%;
+}
 
 form input {
   flex-grow: 1;
@@ -173,7 +182,7 @@ button select{
 
 .unordered-tag{
 
-  padding: 0 40px;
+  padding: 0;
 }
 .container-todo{  
   text-align: center;

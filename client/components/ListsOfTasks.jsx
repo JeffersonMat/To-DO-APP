@@ -132,13 +132,13 @@ class ListOfTasks extends React.Component {
 
     return (
       
-     <div className="list-container">
-      <li   key ={this.props.tasks.id} style={{listStyleType:"none"}} >
+    
+      <li  key ={this.props.tasks.id} style={{listStyleType:"none"}} >
         <button className="buttonDeets" onClick={handleclick} name={taskId} style={this.completeStyling(complete)}>
           {task}
         </button>
        </li>
-       </div>
+       
     );
   };
 
