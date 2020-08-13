@@ -38,10 +38,11 @@ class FormDescription extends React.Component {
   renderForm = (handlesubmit, description, handlechange) => {
     return (
       <>
-        <form onSubmit={handlesubmit}>
+        <form className="description-form" onSubmit={handlesubmit}>
           <input
             type="text"
             name="description"
+            className="text-field"
             defaultValue={description}
             onChange={handlechange}
           />

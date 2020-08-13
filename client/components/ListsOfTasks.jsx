@@ -15,6 +15,7 @@ class ListOfTasks extends React.Component {
     isClick: false,
     isCompleteClick: false,
     isTaskClick: false,
+    styleComplete:false,
   };
 
   handleClick = (e) => {
@@ -99,6 +100,12 @@ class ListOfTasks extends React.Component {
     const name = event.target.name;
     const id = this.props.tasks.id;
 
+   if(name==='Done'){
+     this.setState({
+       styleComplete:true,
+     })
+   }
+
     const newTask = {
       id: this.props.tasks.id,
       Tasks: this.props.tasks.Tasks,
@@ -113,19 +120,31 @@ class ListOfTasks extends React.Component {
     });
   };
 
+  completeStyling =(complete) => {
+  
+    if(complete==='Done'){
+      return {textDecoration:'line-through red', opacity:0.5, background:'black', color:'#fff'}
+      }
+  }
+
   renderTasksLists = (task, taskId, handleclick) => {
+   const complete= this.props.tasks.Completed
+
     return (
-      <li>
-        <button className="buttonDeets" onClick={handleclick} name={taskId}>
+      
+    
+      <li  key ={this.props.tasks.id} style={{listStyleType:"none"}} >
+        <button className="buttonDeets" onClick={handleclick} name={taskId} style={this.completeStyling(complete)}>
           {task}
         </button>
-      </li>
+       </li>
+       
     );
   };
 
   renderTasksDescription = (description, showtextfield) => {
     return (
-      <li>
+      <li style={{listStyle:'none'}}>
         <button id="buttonDeets description-tittle" onClick={showtextfield}>
           Description:{description}
         </button>
@@ -138,79 +157,79 @@ class ListOfTasks extends React.Component {
 
     return (
       <>
-        <li>
-          <button onClick={this.handlePriorityButton}>
-            Priority:{priority}
+        <li style={{listStyle:'none'}}>
+          <button className="description-buttons"  onClick={this.handlePriorityButton}>
+            Priority: {priority}
           </button>
         </li>
         {isClick ? (
           <></>
         ) : (
           <>
-            <label>
-              High
+          
               <input
+                className="priority-buttons"
                 name="Urgent"
-                value="submit"
-                type="radio"
+                value="High"
+                type="submit"
                 onClick={this.handlePriority}
               />
-            </label>
-            <label>
-              Medium
+            
               <input
-                name="Need to do it soon"
-                value="submit"
-                type="radio"
+                className="priority-buttons"
+                name="Hurry Up"
+                value="Med"
+                type="submit"
                 onClick={this.handlePriority}
               />
-            </label>
-            <label>
-              Low
+           
               <input
-                name="Not much pressure"
-                value="submit"
-                type="radio"
+                className="priority-buttons"
+                name="Can Chill"  
+                value="Low"          
+                type="submit"
                 onClick={this.handlePriority}
               />
-            </label>
+       
           </>
         )}
       </>
     );
   };
 
+
+ 
+
   renderCompletedStatus = (completed) => {
     const isCompleteClick = this.state.isCompleteClick;
 
     return (
       <>
-        <li>
-          <button onClick={this.handleCompleteButton}>
-            Completed:{completed}
+        <li style={{listStyle:'none'}}>
+          <button className="description-buttons" onClick={this.handleCompleteButton}>
+            Completed: {completed}
           </button>
         </li>
         {isCompleteClick && (
           <>
-            <label>
-              Yes
+    
               <input
+                className="complete-buttons"
                 name="Done"
-                value="submit"
-                type="radio"
+                value="YES"
+                type="submit"
                 onClick={this.handleComplete}
               />
-            </label>
-            <label>
-              No
+          
               <input
+                className="complete-buttons"
                 name="Not Yet"
-                value="submit"
-                type="radio"
+                value="NO"
+                type="submit"
                 onClick={this.handleComplete}
               />
-            </label>
-            :<></>
+   
+            <></>
           </>
         )}
       </>
@@ -225,7 +244,7 @@ class ListOfTasks extends React.Component {
     const completed = this.props.tasks.Completed;
 
     return (
-      <ul>
+      <ul className="unordered-tag">
         {this.state.isTaskClick
           ? this.renderTasksLists(task, taskId, this.handleTaskButton)
           : this.renderTasksLists(task, taskId, this.handleClick)}
@@ -236,7 +255,7 @@ class ListOfTasks extends React.Component {
         )}
 
         {this.state.showDetails ? (
-          <ul>
+          <ul className="unordered-tag">
             {this.state.isDescriptionClicked
               ? this.renderTasksDescription(description, this.hideTextField)
               : this.renderTasksDescription(description, this.showTextField)}
@@ -245,7 +264,7 @@ class ListOfTasks extends React.Component {
             )}
             {this.renderPriorityStatus(priority)}
             {this.renderCompletedStatus(completed)}
-          </ul>
+        </ul>
         ) : (
           <></>
         )}

@@ -15,11 +15,13 @@ class Todo extends React.Component {
   render() {
     return (
       <>
-        <h1>Todo</h1>
+        
+        <h1>Tasks Manager</h1>
         {this.props.tasks.map((task) => (
           <ListOfTasks tasks={task} />
         ))}
         <Form task={this.props.tasks} />
+       
       </>
     );
   }
