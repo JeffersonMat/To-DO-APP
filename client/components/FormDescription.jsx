@@ -43,10 +43,11 @@ class FormDescription extends React.Component {
             type="text"
             name="description"
             className="text-field"
+            placeholder="Add a description here"
             defaultValue={description}
             onChange={handlechange}
           />
-          <input type="submit" />
+          <button type="submit" > <i class="material-icons center">send</i></button>
         </form>
       </>
     );

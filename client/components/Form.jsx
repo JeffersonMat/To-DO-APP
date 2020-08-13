@@ -9,6 +9,7 @@ class Form extends React.Component {
     description: "",
     priority: 0,
     completed: false,
+    showForm:false,
   };
 
   handleChange = (event) => {
@@ -16,6 +17,12 @@ class Form extends React.Component {
     const value = event.target.value;
     this.setState({ [event.target.name]: value });
   };
+
+handleClick = ()=>{
+  this.setState({
+    showForm:true
+  })
+}
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -31,21 +38,37 @@ class Form extends React.Component {
           return this.props.dispatch(receivedTask(task));
         });
       });
+
+      this.setState({
+        showForm:false
+      })
   };
 
   render() {
     return (
+      <>
+      {this.state.showForm ?
       <form onSubmit={this.handleSubmit}>
+     
         <input
           type="text"
           name="task"
+          placeholder="Add a task here"
           defaultValue={this.state.task}
           onChange={this.handleChange}
         />
-        <input type="submit" value="ADD" />
+      
+     <button className="btn-floating btn-large waves-effect waves-light " type="submit"><i class="material-icons ">add</i></button>
       </form>
+     : 
+     <button className="btn-floating btn-large waves-effect waves-light" onClick={this.handleClick} ><i className="material-icons center">add</i></button>
+      
+    }
+    </>
     );
   }
 }
+
+          
 
 export default connect()(Form);

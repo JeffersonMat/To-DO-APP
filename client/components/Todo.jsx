@@ -6,11 +6,16 @@ import { receivedTask } from "../actions/index";
 import { connect } from "react-redux";
 
 class Todo extends React.Component {
+  state={
+    showForm:false,
+  }
   componentDidMount() {
     getTask().then((task) => {
       return this.props.dispatch(receivedTask(task));
     });
   }
+
+
 
   render() {
     return (
@@ -20,7 +25,9 @@ class Todo extends React.Component {
         {this.props.tasks.map((task) => (
           <ListOfTasks tasks={task} />
         ))}
-        <Form task={this.props.tasks} />
+      
+        <Form task={this.props.tasks} />  
+        
        
       </>
     );

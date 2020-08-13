@@ -16,6 +16,8 @@ class ListOfTasks extends React.Component {
     isCompleteClick: false,
     isTaskClick: false,
     styleComplete:false,
+    arrowUp:false,
+    arrowDown:true,
   };
 
   handleClick = (e) => {
@@ -24,6 +26,8 @@ class ListOfTasks extends React.Component {
       showDetails: true,
       showDeleteButton: true,
       isTaskClick: true,
+      arrowUp:true,
+      arrowDown:false,
     });
   };
 
@@ -132,12 +136,14 @@ class ListOfTasks extends React.Component {
 
     return (
       
-    
+    <div className="task-container">
       <li  key ={this.props.tasks.id} style={{listStyleType:"none"}} >
         <button className="buttonDeets" onClick={handleclick} name={taskId} style={this.completeStyling(complete)}>
-          {task}
+    {task} {this.state.arrowUp  && !this.state.arrowDown ? <i class="small material-icons right">arrow_drop_up</i> : <i class="small material-icons right">arrow_drop_down</i>}
         </button>
+        <button id="delete-button" className="btn-large" onClick={this.handleDelete}><i className="large material-icons delete">delete</i></button>
        </li>
+       </div>
        
     );
   };
@@ -145,9 +151,9 @@ class ListOfTasks extends React.Component {
   renderTasksDescription = (description, showtextfield) => {
     return (
       <li style={{listStyle:'none'}}>
-        <button id="buttonDeets description-tittle" onClick={showtextfield}>
-          Description: {description}
-        </button>
+          <h5>Task Description</h5> 
+          <p>{description}</p>
+        <button className="btn-floating btn-small waves-effect waves-light" onClick={showtextfield}><i class="small material-icons ">add</i></button>
       </li>
     );
   };
@@ -248,11 +254,11 @@ class ListOfTasks extends React.Component {
         {this.state.isTaskClick
           ? this.renderTasksLists(task, taskId, this.handleTaskButton)
           : this.renderTasksLists(task, taskId, this.handleClick)}
-        {!this.state.showDeleteButton && (
+        {/* {!this.state.showDeleteButton && (
           <button id="delete-button" onClick={this.handleDelete}>
             Delete
           </button>
-        )}
+        )} */}
 
         {this.state.showDetails ? (
           <ul className="unordered-tag">
