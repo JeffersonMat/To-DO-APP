@@ -61,7 +61,7 @@ handleClick = ()=>{
      <button className="btn-floating btn-large waves-effect waves-light pulse " type="submit"><i class="material-icons ">add</i></button>
       </form>
      : 
-     <button className="btn-floating btn-large waves-effect waves-light" onClick={this.handleClick} ><i className="material-icons center">add</i></button>
+     <button className="btn-floating btn-large waves-effect waves-light center show-add-form" onClick={this.handleClick} ><i className="material-icons center">add</i></button>
       
     }
     </>

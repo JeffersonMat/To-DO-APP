@@ -4,6 +4,7 @@ import {
   UPDATE_TASK,
   DELETE_TASK,
   GET_TASKS,
+
 } from "../actions/index";
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +26,7 @@ const reducer = (state = initialState, action) => {
 
     case DELETE_TASK:
       return state.filter((task) => task.id !== action.id);
+
 
     default:
       return state;

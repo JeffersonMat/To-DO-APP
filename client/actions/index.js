@@ -4,6 +4,7 @@ export const RECEIVED_TASK = "RECEIVED_TASK";
 export const DELETE_TASK = "DELETE_TASK";
 export const UPDATE_TASK = "UPDATE_TASK";
 export const GET_TASKS = "GET_TASKS";
+export const VIEW_DESCRIPTION = "VIEW_DESCRIPTION"
 
 export const receivedTask = (tasks) => {
   return {
@@ -24,8 +25,8 @@ export const deleteTask = (id) => {
   return {
     type: DELETE_TASK,
     id: id,
-  };
-};
+  }
+}
 
 export const deleteTasks = (id) => {
   return (dispatch) => {
@@ -38,3 +39,10 @@ export const deleteTasks = (id) => {
       });
   };
 };
+
+export const viewDescription=(view)=>{
+  return{
+    type: VIEW_DESCRIPTION,
+    view
+  }
+}

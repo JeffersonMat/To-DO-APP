@@ -1,13 +1,16 @@
 import React from "react";
 import { getTask } from "../apis/api";
 import Form from "./Form";
-import ListOfTasks from "./ListsOfTasks";
+import Tasks from "./Tasks";
 import { receivedTask } from "../actions/index";
 import { connect } from "react-redux";
 
 class Todo extends React.Component {
   state={
     showForm:false,
+    isTaskClick: false,
+    isClick: false,
+
   }
   componentDidMount() {
     getTask().then((task) => {
@@ -21,9 +24,9 @@ class Todo extends React.Component {
     return (
       <>
         
-        <h1>Task Manager</h1>
+        <h2 className="todo-header">Task Manager</h2>
         {this.props.tasks.map((task) => (
-          <ListOfTasks tasks={task} />
+          <Tasks key={task.id} tasks={task}/>
         ))}
       
         <Form task={this.props.tasks} />  
@@ -36,6 +39,7 @@ class Todo extends React.Component {
 function mapstateprops(globalState) {
   return {
     tasks: globalState.tasks,
+    view: globalState.viewForms
   };
 }
 
