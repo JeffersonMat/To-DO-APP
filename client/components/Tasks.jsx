@@ -1,4 +1,4 @@
-import React from "React"
+import React from "react"
 import { connect } from "react-redux"
 import { deleteTask, updateTask, viewDescription } from "../actions/index"
 import { removeTask, getTask } from "../apis/api"
@@ -131,9 +131,9 @@ class Tasks extends React.Component {
  
       {this.renderTasksLists(task,taskId)}
       {this.state.showDetails && (
-        //   <ul className="unordered-tag">
+        
          <DescriptionTask tasks={this.props.tasks}/>
-        //   </ul>
+
       )}
 
       {this.state.showDetails && <PriorityTasks tasks={this.props.tasks}/>}
