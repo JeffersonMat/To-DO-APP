@@ -1,4 +1,4 @@
-const initialstate= false
+const initialstate=true
 
 import{ VIEW_DESCRIPTION } from '../actions/index'
 

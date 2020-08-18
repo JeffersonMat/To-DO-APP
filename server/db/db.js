@@ -31,12 +31,23 @@ function deleteTasks(id, db = connection) {
   return db("TodoList").where("id", id).delete();
 }
 
+/**
+*task is an object and each property value is assingning its property value to the respective column value.
+*task has the same property values as the object coming through the DB.
+*It's been set up that way in the front end.
+*
+*  @({Description:('string')})
+*  @({Priority:'string'})
+*  @({Completed:'string'}) 
+*  @Strings have been set in the front End - their values can be modified as long as their remain a string.
+*/
+
 function editTask(id, task, db = connection) {
   return db("TodoList").where("id", id).update({ Description: task})
 }
 
 function editTaskPriority(id, task, db = connection) {
-  return db("TodoList").where("id", id).update({ Priority: task })
+  return db("TodoList").where("id", id).update({ Priority:task })
 }
 
 

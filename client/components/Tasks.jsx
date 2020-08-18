@@ -12,29 +12,29 @@ class Tasks extends React.Component {
     swapArrows: false,
     showDeleteButton: false,
     showDetails: false,
-    isTaskClick:false,
+    isTaskClick: false,
     swapArrows: true,
   }
 
   handleClick = (e) => {
-      e.preventDefault()
+    e.preventDefault()
     this.setState({
       showDeleteButton: true,
-      showDetails:true,
-      isTaskClick:true,
+      showDetails: true,
+      isTaskClick: true,
       isClick: true,
-      swapArrows:false
+      swapArrows: false,
     })
-  
-  this.props.dispatch(viewDescription(true))
-    
-    
   }
 
-  handleDelete = (event) => {
-  
-    const id = this.props.tasks.id
+  //Delete Task by grabing the task by its id and deletes the whole task object
+  //@updateTasks is receving the current tasks available 
+  //getTasks is returnin the current tasks available
+  //and receiveTasks is updating the global state, so it renders the rest of the tasks
 
+  handleDelete = (e) => {
+    const id = this.props.tasks.id
+    e.preventDefault()
     removeTask(id)
       .then(() => {
         this.props.dispatch(deleteTask(id))
@@ -54,13 +54,11 @@ class Tasks extends React.Component {
     e.preventDefault()
 
     this.setState({
-      isTaskClick:false,
+      isTaskClick: false,
       showDetails: false,
-      swapArrows:true
+      swapArrows: true,
     })
-   this.props.dispatch(viewDescription(false))
-
-}
+  }
 
   completeStyling = (complete, priority) => {
     if (complete === "YES") {
@@ -79,11 +77,11 @@ class Tasks extends React.Component {
         return { background: "#ffa726", color: "#fff" }
 
       case "Can Chill":
-        return { background: "#ffa726", color: "#fff" }
+        return { background: "", color: "black" }
     }
   }
 
-  renderTasksLists = (task, taskId,) => {
+  renderTasksLists = (task, taskId) => {
     const complete = this.props.tasks.Completed
     const priority = this.props.tasks.Priority
     return (
@@ -96,7 +94,12 @@ class Tasks extends React.Component {
               name={taskId}
               style={this.completeStyling(complete, priority)}
             >
-              <h6>{task}<i className="small material-icons right arrow">arrow_drop_up</i></h6>
+              <h6 className="task-title">
+                {task}
+                <i className="small material-icons right arrow">
+                  arrow_drop_up
+                </i>
+              </h6>
             </button>
           ) : (
             <button
@@ -105,8 +108,12 @@ class Tasks extends React.Component {
               name={taskId}
               style={this.completeStyling(complete, priority)}
             >
-             <h6>{task}
-              <i className="small material-icons right arrow">arrow_drop_down</i></h6>
+              <h6 className="task-title">
+                {task}
+                <i className="small material-icons right arrow">
+                  arrow_drop_down
+                </i>
+              </h6>
             </button>
           )}
           <button
@@ -123,31 +130,25 @@ class Tasks extends React.Component {
   render() {
     const taskId = this.props.tasks.id
     const task = this.props.tasks.Tasks
- 
- 
+
     return (
-
       <>
- 
-      {this.renderTasksLists(task,taskId)}
-      {this.state.showDetails && (
-        
-         <DescriptionTask tasks={this.props.tasks}/>
+        {this.renderTasksLists(task, taskId)}
+        {this.state.showDetails && (
+          <DescriptionTask tasks={this.props.tasks} view={this.props.view} />
+        )}
 
-      )}
-
-      {this.state.showDetails && <PriorityTasks tasks={this.props.tasks}/>}
-      {this.state.showDetails && <CompleteTasks tasks={this.props.tasks}/>}
+        {this.state.showDetails && <PriorityTasks tasks={this.props.tasks} />}
+        {this.state.showDetails && <CompleteTasks tasks={this.props.tasks} />}
       </>
-
     )
   }
 }
 
 function mapstateprops(globalState) {
-    return {
-       view: globalState.viewForms
-    };
+  return {
+    view: globalState.viewForms,
   }
+}
 
 export default connect(mapstateprops)(Tasks)

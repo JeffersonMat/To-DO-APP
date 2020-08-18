@@ -23,7 +23,9 @@ handleClick = ()=>{
     showForm:true
   })
 }
-
+//@addTask is expecting an object
+//@receivedTask is updating the Global state and creating a new task with only value of task, the rest of the values are empty.
+//
   handleSubmit = (event) => {
     event.preventDefault();
 
@@ -36,8 +38,8 @@ handleClick = ()=>{
       .then(() => {
         getTask().then((task) => {
           return this.props.dispatch(receivedTask(task));
-        });
-      });
+        })
+      })
 
       this.setState({
         showForm:false

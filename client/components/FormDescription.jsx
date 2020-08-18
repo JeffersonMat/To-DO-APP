@@ -1,6 +1,6 @@
 import React from "react"
-import { editTask } from "../apis/api"
-import { updateTask } from "../actions/index"
+import { editTaskDescription } from "../apis/api"
+import { updateTask} from "../actions/index"
 import { connect } from "react-redux"
 
 class FormDescription extends React.Component {
@@ -9,15 +9,20 @@ class FormDescription extends React.Component {
     showForm: false,
   }
 
-  handleChange = (event) => {
-    event.preventDefault()
+  handleChange = (e) => {
+    if(e.Key==='Enter'){
+      e.preventDefault()
+      }
     const value = event.target.value
     this.setState({ [event.target.name]: value })
   }
 
-  handleSubmit = (e) => {   
+  handleSubmit = (e) => {
+
+    if(e.Key==='Enter'){
     e.preventDefault()
-   const newTask = {
+    }
+    const newTask = {
       id: this.props.task.id,
       Tasks: this.props.task.Tasks,
       Description: this.state.description,
@@ -26,12 +31,12 @@ class FormDescription extends React.Component {
     }
 
     const id = this.props.task.id
-
-    editTask(id, this.state.description).then(() => {
+    this.setState({ showForm:true })
+    editTaskDescription(id, this.state.description).then(() => {
       this.props.dispatch(updateTask(newTask))
     })
-
-    this.setState({ showForm: true })
+   
+    
   }
 
   renderForm = (handlesubmit, description, handlechange) => {
@@ -45,11 +50,19 @@ class FormDescription extends React.Component {
             placeholder="Add a description here"
             defaultValue={description}
             onChange={handlechange}
-            onKeyPress={(e)=>{e.onKeyPress === 'Enter' && e.preventDefault}}
+            onKeyPress={(e) => {
+              e.Key === "Enter" && e.preventDefault
+            }}
           />
-          <button type="submit" onKeyPress={(e)=>{ e.onKeyPress==='Enter' && e.preventDefault()}}>
-           
-            <i class="material-icons center">send</i>
+
+          <button
+            className="btn-floating btn-large waves-effect waves-light pulse "
+            type="submit"
+            onKeyPress={(e) => {
+              e.Key === "Enter" && e.preventDefault()
+            }}
+          >
+            <i className="material-icons ">add</i>
           </button>
         </form>
       </>

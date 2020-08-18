@@ -7,7 +7,8 @@ html {
 
 body {
   margin: 0;
-  background-color: #f7f1f1;
+  /* background-color: #f7f1f1; */
+  background-color: whitesmoke;
   font-family: "Quicksand", sans-serif;
   font-size: 20px;
 }
@@ -22,7 +23,7 @@ h1 {
 .app {
   margin: 4rem auto;
   padding: 2rem 3rem;
-  max-width: 500px;
+  max-width: 450px;
   background-image: url("../images/resizedDesktopImg.jpg");
   color: #f7f1f1;
 }
@@ -98,11 +99,12 @@ form input[type="submit"] {
 
 .priority-btn {
   margin-left: 40px;
+
 }
 
 
 .arrow {
-position:absolute;
+position:relative;
 margin-left: 100px;
 color: black;
 }
@@ -161,15 +163,27 @@ button {
   width: 30%;
  
 }
+.btn.waves-effect.waves-light.priority-buttons{
+  background-color:whitesmoke;
+}
+
+.btn.waves-effect.waves-light.priority-buttons:hover{
+  opacity:0.4;
+  color: #fff;
+}
 
 .priority-btn {
   margin-right: 50px;
 }
+
 .icons-priority{
   color: black;
   font-size:30px;
 }
 
+.btn-floating.btn-large.waves-effect.waves-light.pulse{
+  margin-top:10px;
+}
 
 .complete-buttons {
   padding: 0 1.3rem;
@@ -180,7 +194,8 @@ button {
   cursor: pointer;
   transition: background 0.2s ease-out;
   height: 3rem;
-  width: 60%;
+  width: 32.5%;
+  /* background-color: */
  
 }
 
@@ -197,9 +212,16 @@ button {
   height: 3rem;
   width: 100%;
   font-size: 14px;
+  background-color:whitesmoke;
 }
-.complete-button:hover {
-  background: rgba(255, 255, 255, 0.1);
+.btn-small.complete-buttons{
+  background-color:whitesmoke;
+  color:black;
+  
+}
+
+.btn-small.complete-button:hover {
+  opacity: 0.4;
   color: #fff;
 }
 
@@ -221,4 +243,9 @@ button select {
 }
 .container-todo {
   text-align: center;
+}
+
+.task-title{
+
+  margin-bottom:20px;
 }

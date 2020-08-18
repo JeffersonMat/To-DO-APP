@@ -21,25 +21,28 @@ class DescriptionTask extends React.Component{
       }
  
       renderTaskDescription =( showtextfield) => {
-   
+         
     return (
       <li style={{ listStyle: "none" }}>
         <h5>Task Description 
-        {!this.state.isDescriptionClicked ?
+        {!this.state.isDescriptionClicked  ?  
         <button
           className="btn-floating btn-small waves-effect waves-light description-btn right"
           onClick={showtextfield}
         >
           <i className="small material-icons ">edit</i>
         </button>
-        :
+         :
         <button
           className="btn-floating btn-small waves-effect waves-light description-btn right"
           onClick={showtextfield}
         >
           <i className="small material-icons ">close</i>
         </button>
-      }</h5>
+      }
+      
+      
+      </h5>
         <p>{this.props.tasks.Description}</p>
        
       </li>
@@ -49,7 +52,7 @@ class DescriptionTask extends React.Component{
 
   render() {
 
-
+   console.log(this.props.view,'view');
     const display = this.state.isDescriptionClicked
    
     return(
@@ -66,11 +69,4 @@ class DescriptionTask extends React.Component{
  } 
 }
 
-function mapstateprops(globalState) {
-    return {
-
-       view: globalState.viewForms
-    };
-  }
-
-export default connect(mapstateprops)(DescriptionTask)
+export default connect()(DescriptionTask)

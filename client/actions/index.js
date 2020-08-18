@@ -9,14 +9,13 @@ export const VIEW_DESCRIPTION = "VIEW_DESCRIPTION"
 export const receivedTask = (tasks) => {
   return {
     type: RECEIVED_TASK,
-    tasks: tasks,
+    tasks
   };
 };
 
 export const updateTask = (task) => {
   return {
     type: UPDATE_TASK,
-
     task,
   };
 };
@@ -24,7 +23,7 @@ export const updateTask = (task) => {
 export const deleteTask = (id) => {
   return {
     type: DELETE_TASK,
-    id: id,
+    id
   }
 }
 
