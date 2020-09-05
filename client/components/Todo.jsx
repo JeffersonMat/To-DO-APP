@@ -22,7 +22,7 @@ class Todo extends React.Component {
       <>
         <h2 className="todo-header">Task Manager</h2>
         {this.props.tasks.map((task) => (
-          <div className="card-panel">
+          <div key={task.id} className="card-panel">
             <Tasks key={task.id} tasks={task} />
             </div>
         ))}

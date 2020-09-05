@@ -70,10 +70,10 @@ handleClick = ()=>{
               className="btn-floating btn-large waves-effect waves-light pulse "
               type="submit"
             >
-              <i class="material-icons ">add</i>
+              <i className="material-icons ">add</i>
             </button>
             <a
-              class="waves-effect waves-teal btn-flat"
+              className="waves-effect waves-teal btn-flat"
               onClick={this.handleClose}
             >
               Close

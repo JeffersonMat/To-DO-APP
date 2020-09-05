@@ -10,7 +10,7 @@ class Tasks extends React.Component {
   state = {
     showDetails: false,
     isTaskClick: false,
-    complete: "NOT",
+    complete: "",
   }
 
   handleClick = (e) => {
@@ -61,6 +61,7 @@ class Tasks extends React.Component {
     }
 
     this.setState({ complete: "YES" })
+
     editTaskComplete(id, complete).then(() => {
       this.props.dispatch(updateTask(newTask))
     })
@@ -145,7 +146,7 @@ class Tasks extends React.Component {
               onClick={this.handleCheckBox}
             >
               <i
-                className="large material-icons check_box_outline_blank"
+                className="small material-icons check_box_outline_blank"
                 onClick={this.handleCheckBox}
               >
                 check_box_outline_blank
@@ -198,10 +199,8 @@ class Tasks extends React.Component {
 
     return (
       <>
-        
         {this.renderTasksLists(task, taskId)}
-          {this.state.showDetails && <CardPanel tasks={this.props.tasks} />}
-
+        {this.state.showDetails && <CardPanel tasks={this.props.tasks} />}
       </>
     )
   }
