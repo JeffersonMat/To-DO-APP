@@ -1,34 +1,73 @@
 import React from "react"
 import { connect } from "react-redux"
-import { deleteTask, updateTask, viewDescription } from "../actions/index"
+import { deleteTask, updateTask } from "../actions/index"
+import { editTaskComplete } from "../apis/complete"
 import { removeTask, getTask } from "../apis/api"
 
-import DescriptionTask from "./DescriptionTask"
-import PriorityTasks from "./PriorityTasks"
-import CompleteTasks from "./CompleteTasks"
+import CardPanel from "./CardPanel"
 
 class Tasks extends React.Component {
   state = {
-    swapArrows: false,
-    showDeleteButton: false,
     showDetails: false,
     isTaskClick: false,
-    swapArrows: true,
+    complete: "NOT",
   }
 
   handleClick = (e) => {
     e.preventDefault()
     this.setState({
-      showDeleteButton: true,
       showDetails: true,
       isTaskClick: true,
-      isClick: true,
-      swapArrows: false,
+    })
+  }
+
+  handleComplete = (event) => {
+    event.preventDefault()
+    const complete = this.state.complete
+    const id = this.props.tasks.id
+
+    //@updateTask is expecting an object
+    //@updateTask is only updating Description is this case, doesn't update the whole task
+    //Id needs to remain unchange
+
+    const newTask = {
+      id: this.props.tasks.id,
+      Tasks: this.props.tasks.Tasks,
+      Description: this.props.tasks.Description,
+      Priority: this.props.tasks.Priority,
+      Completed: complete,
+    }
+    this.setState({ complete: "NOT" })
+
+    editTaskComplete(id, complete).then(() => {
+      this.props.dispatch(updateTask(newTask))
+    })
+  }
+
+  handleCheckBox = () => {
+    const complete = this.state.complete
+    const id = this.props.tasks.id
+
+    //@updateTask is expecting an object
+    //@updateTask is only updating Description is this case, doesn't update the whole task
+    //Id needs to remain unchange
+
+    const newTask = {
+      id: this.props.tasks.id,
+      Tasks: this.props.tasks.Tasks,
+      Description: this.props.tasks.Description,
+      Priority: this.props.tasks.Priority,
+      Completed: complete,
+    }
+
+    this.setState({ complete: "YES" })
+    editTaskComplete(id, complete).then(() => {
+      this.props.dispatch(updateTask(newTask))
     })
   }
 
   //Delete Task by grabing the task by its id and deletes the whole task object
-  //@updateTasks is receving the current tasks available 
+  //@updateTasks is receving the current tasks available
   //getTasks is returnin the current tasks available
   //and receiveTasks is updating the global state, so it renders the rest of the tasks
 
@@ -56,7 +95,6 @@ class Tasks extends React.Component {
     this.setState({
       isTaskClick: false,
       showDetails: false,
-      swapArrows: true,
     })
   }
 
@@ -70,14 +108,14 @@ class Tasks extends React.Component {
       }
     }
     switch (priority) {
-      case "Urgent":
+      case "High":
         return { background: "#d50000", color: "#fff" }
 
-      case "Hurry Up":
+      case "Medium":
         return { background: "#ffa726", color: "#fff" }
 
-      case "Can Chill":
-        return { background: "", color: "black" }
+      case "Low":
+        return { background: "#1de9b6", color: "black" }
     }
   }
 
@@ -87,9 +125,36 @@ class Tasks extends React.Component {
     return (
       <div className="task-container">
         <li key={this.props.tasks.id} style={{ listStyleType: "none" }}>
+          {complete === "YES" ? (
+            <button
+              id="complete-button"
+              className="btn-large"
+              onClick={this.handleComplete}
+            >
+              <i
+                className="large material-icons done "
+                onClick={this.handleComplete}
+              >
+                done
+              </i>
+            </button>
+          ) : (
+            <button
+              id="complete-button"
+              className="btn-large"
+              onClick={this.handleCheckBox}
+            >
+              <i
+                className="large material-icons check_box_outline_blank"
+                onClick={this.handleCheckBox}
+              >
+                check_box_outline_blank
+              </i>
+            </button>
+          )}
           {this.state.isTaskClick ? (
             <button
-              className="buttonDeets"
+              className="button-tasks"
               onClick={this.handleTaskButton}
               name={taskId}
               style={this.completeStyling(complete, priority)}
@@ -103,7 +168,7 @@ class Tasks extends React.Component {
             </button>
           ) : (
             <button
-              className="buttonDeets"
+              className="button-tasks"
               onClick={this.handleClick}
               name={taskId}
               style={this.completeStyling(complete, priority)}
@@ -133,13 +198,10 @@ class Tasks extends React.Component {
 
     return (
       <>
+        
         {this.renderTasksLists(task, taskId)}
-        {this.state.showDetails && (
-          <DescriptionTask tasks={this.props.tasks} view={this.props.view} />
-        )}
+          {this.state.showDetails && <CardPanel tasks={this.props.tasks} />}
 
-        {this.state.showDetails && <PriorityTasks tasks={this.props.tasks} />}
-        {this.state.showDetails && <CompleteTasks tasks={this.props.tasks} />}
       </>
     )
   }

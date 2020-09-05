@@ -46,28 +46,51 @@ handleClick = ()=>{
       })
   };
 
+
+  handleClose = (e) => {
+    this.setState({
+      showForm: false,
+    })
+  }
+
   render() {
     return (
       <>
-      {this.state.showForm ?
-      <form onSubmit={this.handleSubmit}>
-     
-        <input
-          type="text"
-          name="task"
-          placeholder="Add a task here"
-          defaultValue={this.state.task}
-          onChange={this.handleChange}
-        />
-      
-     <button className="btn-floating btn-large waves-effect waves-light pulse " type="submit"><i class="material-icons ">add</i></button>
-      </form>
-     : 
-     <button className="btn-floating btn-large waves-effect waves-light center show-add-form" onClick={this.handleClick} ><i className="material-icons center">add</i></button>
-      
-    }
-    </>
-    );
+        {this.state.showForm ? (
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              name="task"
+              placeholder="Add a task here"
+              defaultValue={this.state.task}
+              onChange={this.handleChange}
+            />
+
+            <button
+              className="btn-floating btn-large waves-effect waves-light pulse "
+              type="submit"
+            >
+              <i class="material-icons ">add</i>
+            </button>
+            <a
+              class="waves-effect waves-teal btn-flat"
+              onClick={this.handleClose}
+            >
+              Close
+            </a>
+          </form>
+        ) : (
+          <>
+            <button
+              className="btn-floating btn-large waves-effect waves-light center show-add-form"
+              onClick={this.handleClick}
+            >
+              <i className="material-icons center">add</i>
+            </button>
+          </>
+        )}
+      </>
+    )
   }
 }
 

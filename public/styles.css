@@ -23,9 +23,10 @@ h1 {
 .app {
   margin: 4rem auto;
   padding: 2rem 3rem;
-  max-width: 450px;
-  background-image: url("../images/resizedDesktopImg.jpg");
-  color: #f7f1f1;
+  min-width:80vw;
+  /* background-image: url("../images/resizedDesktopImg.jpg"); */
+  background:#fffafa;
+  color: #333;
 }
 
 .todo-list {
@@ -63,7 +64,7 @@ form {
 
 .text-field {
   width: 100%;
-  color: #fff;
+  color: #333;
 }
 
 form input {
@@ -72,12 +73,12 @@ form input {
   background: #f7f1f1;
   padding: 0 1.5em;
   font-size: initial;
-  color: #fff;
+  color: #333;
 }
 
 form input[type="submit"] {
   padding: 0 1.3rem;
-  color: #fff;
+  color: #333;
   opacity: 0.9;
   text-transform: uppercase;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -88,7 +89,7 @@ form input[type="submit"] {
 
 form input[type="submit"]:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: #333;
 }
 
 form input,
@@ -110,22 +111,31 @@ color: black;
 }
 
 
+#complete-button {
+  width: 8%;
+  padding: 0 10px 0 0;
+  margin-right: 6px;
+  background: none;
+  border: none;
+  box-shadow: none;
+  color:#333
+}
+#complete-button i{
+  display: inline-block;
+}
+
+
 #delete-button {
-  width: 10%;
-  padding: 0 0 5px 0;
+  width: 5%;
+  padding: 0 0 0 0;
   margin-left: 5px;
   background: none;
   border: none;
 }
 
-#delete-button i {
-  background-color: none;
-  color: #fff;
-}
-
 .task-container {
   margin-top: 10px;
-  margin-left:50px;
+  margin:0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -149,6 +159,7 @@ button {
   text-decoration: none;
   padding: 0;
   font-size: 20px;
+  width: auto;
   height: auto;
 }
 .priority-buttons {
@@ -163,8 +174,14 @@ button {
   width: 30%;
  
 }
-.btn.waves-effect.waves-light.priority-buttons{
-  background-color:whitesmoke;
+.btn.waves-effect.waves-light.low{
+  background-color:#1de9b6;
+}
+.btn.waves-effect.waves-light.medium{
+  background-color:#ffa726;
+}
+.btn.waves-effect.waves-light.high{
+  background-color:#d50000;
 }
 
 .btn.waves-effect.waves-light.priority-buttons:hover{
@@ -227,13 +244,18 @@ button {
 
 button:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: #333;
 }
 
 #delete-button:hover {
   color: #fff;
 }
-
+ #delete-button i{
+   color: #333;
+ }
+ #delete-button{
+   box-shadow: none;
+ }
 button select {
   text-transform: none;
 }
@@ -249,3 +271,28 @@ button select {
 
   margin-bottom:20px;
 }
+
+div.card-panel.dropdown-content{
+  background:#ffff;
+}
+
+a.btn-flat{
+  text-decoration:underline;
+}
+
+
+
+/* #tasks-container li{
+  margin: 0 auto;
+} */
+
+/* #buttonDeets {
+  border: none;
+  background:none;
+  box-shadow: none;
+  display: inline-block;
+  text-decoration: none;
+  padding: 0;
+  font-size: 20px;
+  height: auto;
+} */

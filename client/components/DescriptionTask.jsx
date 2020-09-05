@@ -24,7 +24,7 @@ class DescriptionTask extends React.Component{
          
     return (
       <li style={{ listStyle: "none" }}>
-        <h5>Task Description 
+        <h5>Description 
         {!this.state.isDescriptionClicked  ?  
         <button
           className="btn-floating btn-small waves-effect waves-light description-btn right"

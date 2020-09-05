@@ -44,55 +44,54 @@ class PriorityTasks extends React.Component {
       <>
         <li style={{ listStyle: "none" }}>
           <h5 className="priority-title">
-            Priority: {priority}
-           {!isClick ? <button
-              className="btn-floating btn-small waves-effect waves-light priority-btn right"
-              onClick={this.handlePriorityButton}
-            >
-             <i className="small material-icons ">edit</i> 
-            </button>
-            :
-            <button
-              className="btn-floating btn-small waves-effect waves-light priority-btn right"
-              onClick={this.handlePriorityClose}
-            >
-             <i className="small material-icons ">close</i> 
-            </button>
-            }
+            Priority
+            {!isClick ? (
+              <button
+                className="btn-floating btn-small waves-effect waves-light priority-btn right"
+                onClick={this.handlePriorityButton}
+              >
+                <i className="small material-icons ">edit</i>
+              </button>
+            ) : (
+              <button
+                className="btn-floating btn-small waves-effect waves-light priority-btn right"
+                onClick={this.handlePriorityClose}
+              >
+                <i className="small material-icons ">close</i>
+              </button>
+            )}
           </h5>
+          <p>{priority}</p>
         </li>
-        {isClick ?     
-              <>
-            <button
-              className="btn waves-effect waves-light priority-buttons"
-              name="Urgent"
-              onClick={this.handlePriority}
-            >
-              <i className="large material-icons icons-priority">sentiment_neutral</i>
-            </button>
-
-            <button
-              className="btn waves-effect waves-light priority-buttons"
-              name="Hurry Up"
-              onClick={this.handlePriority}
-            >
-               <i className="large material-icons icons-priority ">sentiment_satisfied</i>
-            </button>
-
-            <button
-              className="btn waves-effect waves-light priority-buttons"
-              name="Can Chill"
-              onClick={this.handlePriority}
-            >
-                <i className="large material-icons icons-priority">
-                sentiment_very_satisfied
-                </i>
-            </button>
-          </>
-          :
+        {isClick ? (
           <>
+            <button
+              className="btn waves-effect waves-light priority-buttons low"
+              name="Low"
+              onClick={this.handlePriority}
+            >
+           Low
+            </button>
+
+            <button
+              className="btn waves-effect waves-light priority-buttons medium"
+              name="Medium"
+              onClick={this.handlePriority}
+            >
+            Medium
+            </button>
+
+            <button
+              className="btn waves-effect waves-light priority-buttons high"
+              name="High"
+              onClick={this.handlePriority}
+            >
+            High
+            </button>
           </>
-        }
+        ) : (
+          <></>
+        )}
       </>
     )
   }
